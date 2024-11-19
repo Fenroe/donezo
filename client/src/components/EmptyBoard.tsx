@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { PrimaryButton } from "./PrimaryButton";
 
 export const EmptyBoard = () => {
   return (
@@ -6,7 +7,7 @@ export const EmptyBoard = () => {
       <Heading>
         This board is empty. Create a new column to get started.
       </Heading>
-      <Button>+ Add New Column</Button>
+      <PrimaryButton text="+ Add New Column" isActive />
     </Container>
   );
 };
@@ -26,19 +27,4 @@ const Heading = styled.span`
   font-family: "Plus Jakarta Sans", sans-serif;
   color: #828fa3;
   text-align: center;
-`;
-
-const Button = styled.button`
-  background-color: #635fc7;
-  color: white;
-  border: none;
-  border-radius: 24px;
-  width: 174px;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 19px;
 `;

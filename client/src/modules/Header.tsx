@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PrimaryButton } from "./PrimaryButton";
+import { PrimaryButton } from "../components";
 
 interface HeaderProps {
   boardName: string;
@@ -9,12 +9,12 @@ interface HeaderProps {
 export const Header = ({ boardName, active }: HeaderProps) => {
   return (
     <OuterContainer data-testid="header">
-      <SidebarHeader>
-        <SidebarLogo src="/assets/logo-dark.svg" />
-      </SidebarHeader>
+      <LogoContainer>
+        <Logo src="/assets/logo-dark.svg" />
+      </LogoContainer>
       <InnerContainer>
         <MobileContainer>
-          <Logo src="/assets/logo-mobile.svg" />
+          <MobileLogo src="/assets/logo-mobile.svg" />
           <BoardSelectContainer>
             <BoardName data-testid="boardName">{boardName}</BoardName>
             <DownArrow src="/assets/icon-chevron-down.svg" />
@@ -47,7 +47,7 @@ const InnerContainer = styled.div`
   padding: 0 32px;
 `;
 
-const SidebarHeader = styled.div`
+const LogoContainer = styled.div`
   display: none;
   justify-content: start;
   flex-shrink: 0;
@@ -66,7 +66,7 @@ const SidebarHeader = styled.div`
   }
 `;
 
-const SidebarLogo = styled.img`
+const Logo = styled.img`
   width: 100%;
   max-width: 200px;
 `;
@@ -108,7 +108,7 @@ const DesktopContainer = styled.div`
   }
 `;
 
-const Logo = styled.img`
+const MobileLogo = styled.img`
   width: 24px;
   height: 25px;
 `;

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { SwitchButton } from "./SwitchButton";
-import { SidebarButton } from "./SidebarButton";
+import { ListHeading, SwitchButton, SidebarButton } from "../components";
 
 interface SidebarProps {
   boardNames: string[];
@@ -22,7 +21,7 @@ export const Sidebar = ({ boardNames }: SidebarProps) => {
       <SidebarContainer $isOpen={isOpen}>
         <SidebarTop>
           <SidebarMain>
-            <MenuHeading>all boards ({boardNames.length})</MenuHeading>
+            <ListHeading text="all boards" count={boardNames.length} />
             <SidebarMenu>
               {boardNames.map((name) => (
                 <SidebarButton key={name} text={name} />
