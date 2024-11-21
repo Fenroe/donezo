@@ -1,0 +1,1 @@
+export { getTaskCardSubheading } from "./getTaskCardSubheading";

@@ -127,7 +127,6 @@ const SidebarMenu = styled.div`
 `;
 
 const MenuHeading = styled.h2`
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bold;
   font-size: 12px;
   line-height: 15px;
@@ -179,7 +178,6 @@ const SidebarToggle = styled.button`
   justify-content: start;
   gap: 12px;
   color: #828fa3;
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bold;
   line-height: 19px;
   font-size: 15px;

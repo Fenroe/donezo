@@ -10,7 +10,6 @@ export const ListHeading = ({ text, count }: ListHeadingProps) => {
 };
 
 const Heading = styled.h2`
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bold;
   font-size: 12px;
   line-height: 15px;

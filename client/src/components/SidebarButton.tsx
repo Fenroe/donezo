@@ -44,7 +44,6 @@ const Button = styled.button<{ $isVariant: boolean }>`
 const Label = styled.span`
   font-size: 15px;
   line-height: 19px;
-  font-family: "Plus Jakarta Sans", sans-serif;
   margin-left: 10px;
   font-weight: 700;
 `;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Sidebar } from "./components";
+import { Modal, Sidebar } from "./components";
 import { useEffect, useState } from "react";
 import { IProjectData, IBoard } from "./data";
-import { Board, Header } from "./modules";
+import { Board, Header, ViewTaskModal } from "./modules";
 
 function App() {
   const [data, setData] = useState<IProjectData | null>(null);
@@ -39,6 +39,7 @@ function App() {
 
   return (
     <>
+      <ViewTaskModal />
       <AppContainer>
         <BodyContainer>
           <Header
@@ -57,25 +58,27 @@ function App() {
 
 const AppContainer = styled.div`
   display: flex;
-  height: 100%;
+  overflow: hidden;
 `;
 
 const BodyContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;  
 `;
 
 const Main = styled.main`
-  min-height: calc(100vh - 64px);
+  height: calc(100vh - 64px);
   display: flex;
   align-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
 
   @media (min-width: 600px) {
-    min-height: calc(100vh - 80px);
+    height: calc(100vh - 80px);
   }
 
   @media (min-width: 1200px) {
-    min-height: calc(100vh - 96px);
+    height: calc(100vh - 96px);
   }
 `;
 

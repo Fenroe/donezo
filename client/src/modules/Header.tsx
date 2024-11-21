@@ -45,6 +45,7 @@ const InnerContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 32px;
+  border-bottom: 1px solid #f4f7fd;
 `;
 
 const LogoContainer = styled.div`
@@ -124,7 +125,6 @@ const BoardName = styled.h1`
   font-size: 18px;
   line-height: 23px;
   font-weight: 700;
-  font-family: "Plus Jakarta Sans", sans-serif;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

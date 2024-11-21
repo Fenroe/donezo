@@ -1,7 +1,10 @@
+export { Column } from "./Column";
 export { EmptyBoard } from "./EmptyBoard";
-export { Header } from "./Header";
 export { ListHeading } from "./ListHeading";
+export { Modal } from "./Modal";
 export { PrimaryButton } from "./PrimaryButton";
 export { Sidebar } from "./Sidebar";
 export { SidebarButton } from "./SidebarButton";
+export { SubtaskMenuItem } from "./SubtaskMenuItem";
 export { SwitchButton } from "./SwitchButton";
+export { TaskCard } from "./TaskCard";

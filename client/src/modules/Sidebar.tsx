@@ -125,17 +125,6 @@ const SidebarMenu = styled.div`
   align-items: start;
 `;
 
-const MenuHeading = styled.h2`
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 2.4px;
-  color: #828fa3;
-  text-transform: uppercase;
-  padding: 0 24px;
-`;
-
 const SidebarThemeContainer = styled.div`
   background-color: #f4f7fd;
   display: flex;
@@ -178,7 +167,6 @@ const SidebarToggle = styled.button`
   justify-content: start;
   gap: 12px;
   color: #828fa3;
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bold;
   line-height: 19px;
   font-size: 15px;

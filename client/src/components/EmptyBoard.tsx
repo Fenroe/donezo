@@ -24,7 +24,6 @@ const Heading = styled.span`
   font-size: 18px;
   line-height: 23px;
   font-weight: bold;
-  font-family: "Plus Jakarta Sans", sans-serif;
   color: #828fa3;
   text-align: center;
 `;
