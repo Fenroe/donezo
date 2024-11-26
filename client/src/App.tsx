@@ -1,10 +1,14 @@
 import styled from "styled-components";
-import { Modal, Sidebar } from "./components";
+import { Sidebar } from "./components";
 import { useEffect, useState } from "react";
 import { IProjectData, IBoard } from "./data";
-import { Board, Header, ViewTaskModal } from "./modules";
+import { Board, CreateTaskModal, Header, ViewTaskModal } from "./modules";
+import { activeModalAtom } from "./state";
+import { useAtomValue } from "jotai";
 
 function App() {
+  const activeModal = useAtomValue(activeModalAtom);
+
   const [data, setData] = useState<IProjectData | null>(null);
 
   const getBoardNames = (data: IProjectData) => {
@@ -31,6 +35,18 @@ function App() {
       return (await res.json()) as IProjectData;
     };
 
+    const getBoardNames = async () => {
+      const res = await fetch("/data.json");
+      const data = (await res.json()) as IProjectData;
+      return data.boards.map((board) => board.name);
+    };
+
+    const getBoardData = async (boardName: string) => {
+      const res = await fetch("/data.json");
+      const data = (await res.json()) as IProjectData;
+      return data.boards.filter((board) => board.name === boardName)[0];
+    };
+
     getData().then((res) => {
       setData(res);
       setBoard(res.boards[0]);
@@ -39,7 +55,8 @@ function App() {
 
   return (
     <>
-      <ViewTaskModal />
+      {activeModal === "viewTask" && <ViewTaskModal />}
+      {activeModal === "createTask" && <CreateTaskModal />}
       <AppContainer>
         <BodyContainer>
           <Header
@@ -63,7 +80,7 @@ const AppContainer = styled.div`
 
 const BodyContainer = styled.div`
   width: 100%;
-  height: 100vh;  
+  height: 100vh;
 `;
 
 const Main = styled.main`

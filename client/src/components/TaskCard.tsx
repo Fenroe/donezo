@@ -1,8 +1,8 @@
 import { ITask } from "../data";
 import { styled } from "styled-components";
 import { getTaskCardSubheading } from "../utils";
-import { useAtom } from "jotai";
-import { isModalVisibleAtom, viewableTaskAtom } from "../state";
+import { useAtom, useSetAtom } from "jotai";
+import { activeModalAtom, viewableTaskAtom } from "../state";
 
 interface TaskCardProps {
   task: ITask;
@@ -10,14 +10,11 @@ interface TaskCardProps {
 
 export const TaskCard = ({ task }: TaskCardProps) => {
   const [_, setViewableTask] = useAtom(viewableTaskAtom);
-  const [modalIsVisible, setModalIsVisible] = useAtom(isModalVisibleAtom);
+  const setActiveModal = useSetAtom(activeModalAtom);
 
   const onClick = () => {
-    if (modalIsVisible) {
-      return;
-    }
     setViewableTask(task);
-    setModalIsVisible(true);
+    setActiveModal("viewTask");
   };
 
   return (

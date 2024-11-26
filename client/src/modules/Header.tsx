@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { PrimaryButton } from "../components";
+import { AppButton } from "../components";
+import { useSetAtom } from "jotai";
+import { activeModalAtom } from "../state";
 
 interface HeaderProps {
   boardName: string;
@@ -7,10 +9,16 @@ interface HeaderProps {
 }
 
 export const Header = ({ boardName, active }: HeaderProps) => {
+  const setActiveModal = useSetAtom(activeModalAtom);
+
+  const onClick = () => {
+    setActiveModal("createTask");
+  };
+
   return (
     <OuterContainer data-testid="header">
       <LogoContainer>
-        <Logo src="/assets/logo-dark.svg" />
+        <Logo src="/assets/logo-light.svg" />
       </LogoContainer>
       <InnerContainer>
         <MobileContainer>
@@ -24,13 +32,19 @@ export const Header = ({ boardName, active }: HeaderProps) => {
           <BoardName>{boardName}</BoardName>
         </DesktopContainer>
         <MobileContainer>
-          <Button $active={!active}>
+          <Button $active={!active} onClick={onClick}>
             <Add src="/assets/icon-add-task-mobile.svg" />
           </Button>
           <Add src="/assets/icon-vertical-ellipsis.svg" />
         </MobileContainer>
         <DesktopContainer>
-          <PrimaryButton text="+Add New Task" isActive={active} />
+          <AppButton
+            text="+Add New Task"
+            isActive={active}
+            onClick={onClick}
+            variant="primary"
+            size="large"
+          />
           <Add src="/assets/icon-vertical-ellipsis.svg" />
         </DesktopContainer>
       </InnerContainer>

@@ -1,13 +1,21 @@
 import { styled } from "styled-components";
-import { PrimaryButton } from "./PrimaryButton";
+import { AppButton } from "./AppButton";
 
 export const EmptyBoard = () => {
+  const handleAddColumn = () => console.log("click");
+
   return (
     <Container>
       <Heading>
         This board is empty. Create a new column to get started.
       </Heading>
-      <PrimaryButton text="+ Add New Column" isActive />
+      <AppButton
+        text="+ Add New Column"
+        size="large"
+        isActive
+        variant="primary"
+        onClick={handleAddColumn}
+      />
     </Container>
   );
 };

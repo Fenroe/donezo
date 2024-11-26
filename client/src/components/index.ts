@@ -1,8 +1,11 @@
 export { Column } from "./Column";
+export { Dropdown } from "./Dropdown";
 export { EmptyBoard } from "./EmptyBoard";
 export { ListHeading } from "./ListHeading";
 export { Modal } from "./Modal";
-export { PrimaryButton } from "./PrimaryButton";
+export { ModalHeader } from "./ModalHeader";
+export { ModalSubheading } from "./ModalSubheading";
+export { AppButton } from "./AppButton";
 export { Sidebar } from "./Sidebar";
 export { SidebarButton } from "./SidebarButton";
 export { SubtaskMenuItem } from "./SubtaskMenuItem";

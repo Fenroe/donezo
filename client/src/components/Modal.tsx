@@ -2,17 +2,21 @@ import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import { useAtom } from "jotai";
-import { isModalVisibleAtom } from "../state";
+import { activeModalAtom } from "../state";
 
 interface ModalProps {
   children: JSX.Element;
 }
 
 export const Modal = ({ children }: ModalProps) => {
-  const [isVisible, setIsVisible] = useAtom(isModalVisibleAtom);
+  const [activeModal, setActiveModal] = useAtom(activeModalAtom);
+
+  const onClose = () => {
+    setActiveModal("");
+  };
 
   useEffect(() => {
-    if (isVisible) {
+    if (activeModal !== "") {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -20,12 +24,12 @@ export const Modal = ({ children }: ModalProps) => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isVisible]);
+  }, [activeModal]);
 
-  if (!isVisible) return null;
+  if (activeModal === "") return null;
 
   return ReactDOM.createPortal(
-    <ModalOverlay onClick={() => setIsVisible(false)}>
+    <ModalOverlay onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         {children}
       </ModalContent>
@@ -56,15 +60,7 @@ const ModalContent = styled.div`
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   z-index: 1001;
   width: 90%;
-  max-width: 500px;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
+  max-width: 480px;
+  max-height: 90%;
+  overflow-y: auto;
 `;

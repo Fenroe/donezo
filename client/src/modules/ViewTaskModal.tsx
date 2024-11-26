@@ -1,4 +1,4 @@
-import { Modal, SubtaskMenuItem } from "../components";
+import { Modal, ModalHeader, SubtaskMenuItem } from "../components";
 import { useAtom } from "jotai";
 import { viewableTaskAtom } from "../state";
 import styled from "styled-components";
@@ -9,10 +9,7 @@ export const ViewTaskModal = () => {
   return (
     <Modal>
       <Container>
-        <Header>
-          <Heading>{task?.title}</Heading>
-          <Add src="/assets/icon-vertical-ellipsis.svg" />
-        </Header>
+        <ModalHeader heading={task?.title || ""} showOptionsButton />
         <Description>{task?.description}</Description>
         <SubtasksHeading>
           Subtasks ({task?.subtasks.length} of {task?.subtasks.length})
@@ -40,19 +37,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-`;
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-`;
-
-const Heading = styled.h2`
-  font-size: 18px;
-  line-height: 23px;
-  font-weight: bold;
-  color: #000112;
 `;
 
 const Description = styled.p`
@@ -105,5 +89,3 @@ const Option = styled.option`
   padding: 10px;
   font-size: 16px;
 `;
-
-const Add = styled.img``;
