@@ -3,21 +3,25 @@ import { styled } from "styled-components";
 interface SidebarButtonProps {
   text: string;
   isVariant?: boolean;
+  isActive?: boolean;
+  onClick: () => void;
 }
 
 export const SidebarButton = ({
   text,
   isVariant = false,
+  isActive = false,
+  onClick,
 }: SidebarButtonProps) => {
   return (
-    <Button $isVariant={isVariant}>
+    <Button $isVariant={isVariant} $isActive={isActive} onClick={onClick}>
       <Icon />
       <Label>{text}</Label>
     </Button>
   );
 };
 
-const Button = styled.button<{ $isVariant: boolean }>`
+const Button = styled.button<{ $isVariant: boolean; $isActive: boolean }>`
   display: flex;
   width: 240px;
   height: 48px;
@@ -27,13 +31,14 @@ const Button = styled.button<{ $isVariant: boolean }>`
   border: none;
   border-top-right-radius: 24px;
   border-bottom-right-radius: 24px;
-  background-color: white;
-  color: ${(props) => (props.$isVariant ? "#635fc7" : "#828fa3")};
+  background-color: ${(props) => (props.$isActive ? "#635fc7" : "white")};
+  color: ${(props) =>
+    props.$isVariant ? "#635fc7" : props.$isActive ? "white" : "#828fa3"};
   cursor: pointer;
 
   &:hover {
-    background-color: #635fc7;
-    color: white;
+    background-color: #f0effa;
+    color: #635fc7;
   }
 
   @media (min-width: 1200px) {

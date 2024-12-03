@@ -1,12 +1,12 @@
 export { Column } from "./Column";
 export { Dropdown } from "./Dropdown";
 export { EmptyBoard } from "./EmptyBoard";
+export { HideSidebarButton } from "./HideSidebarButton";
 export { ListHeading } from "./ListHeading";
 export { Modal } from "./Modal";
 export { ModalHeader } from "./ModalHeader";
 export { ModalSubheading } from "./ModalSubheading";
 export { AppButton } from "./AppButton";
-export { Sidebar } from "./Sidebar";
 export { SidebarButton } from "./SidebarButton";
 export { SubtaskMenuItem } from "./SubtaskMenuItem";
 export { SwitchButton } from "./SwitchButton";

@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import { AppButton } from "../components";
-import { useSetAtom } from "jotai";
-import { activeModalAtom } from "../state";
+import { useAtomValue, useSetAtom } from "jotai";
+import { activeModalAtom, activeBoardAtom, boardDataAtom } from "../state";
 
-interface HeaderProps {
-  boardName: string;
-  active: boolean;
-}
+export const Header = () => {
+  const activeBoard = useAtomValue(activeBoardAtom);
 
-export const Header = ({ boardName, active }: HeaderProps) => {
+  const boardData = useAtomValue(boardDataAtom);
+
   const setActiveModal = useSetAtom(activeModalAtom);
 
   const onClick = () => {
@@ -24,15 +23,15 @@ export const Header = ({ boardName, active }: HeaderProps) => {
         <MobileContainer>
           <MobileLogo src="/assets/logo-mobile.svg" />
           <BoardSelectContainer>
-            <BoardName data-testid="boardName">{boardName}</BoardName>
+            <BoardName data-testid="boardName">{activeBoard}</BoardName>
             <DownArrow src="/assets/icon-chevron-down.svg" />
           </BoardSelectContainer>
         </MobileContainer>
         <DesktopContainer>
-          <BoardName>{boardName}</BoardName>
+          <BoardName>{activeBoard}</BoardName>
         </DesktopContainer>
         <MobileContainer>
-          <Button $active={!active} onClick={onClick}>
+          <Button $active={boardData.columns.length !== 0} onClick={onClick}>
             <Add src="/assets/icon-add-task-mobile.svg" />
           </Button>
           <Add src="/assets/icon-vertical-ellipsis.svg" />
@@ -40,7 +39,7 @@ export const Header = ({ boardName, active }: HeaderProps) => {
         <DesktopContainer>
           <AppButton
             text="+Add New Task"
-            isActive={active}
+            isActive={boardData.columns.length !== 0}
             onClick={onClick}
             variant="primary"
             size="large"

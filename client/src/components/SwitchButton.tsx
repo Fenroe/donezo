@@ -32,6 +32,10 @@ const Switch = styled.div`
   border-radius: 24px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #a7a4ff;
+  }
 `;
 
 const SwitchKnob = styled.div<{ $isOn: boolean }>`

@@ -1,12 +1,24 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { ListHeading, SwitchButton, SidebarButton } from "../components";
+import {
+  ListHeading,
+  SwitchButton,
+  SidebarButton,
+  HideSidebarButton,
+} from "../components";
+import { activeBoardAtom, boardsAtom } from "../state";
+import { useAtom, useAtomValue } from "jotai";
 
-interface SidebarProps {
-  boardNames: string[];
-}
-export const Sidebar = ({ boardNames }: SidebarProps) => {
+export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
+
+  const [activeBoard, setActiveBoard] = useAtom(activeBoardAtom);
+
+  const boards = useAtomValue(boardsAtom);
+
+  const handleChangeBoard = (board: string) => {
+    setActiveBoard(board);
+  };
 
   const showSidebar = () => {
     setIsOpen(true);
@@ -21,12 +33,21 @@ export const Sidebar = ({ boardNames }: SidebarProps) => {
       <SidebarContainer $isOpen={isOpen}>
         <SidebarTop>
           <SidebarMain>
-            <ListHeading text="all boards" count={boardNames.length} />
+            <ListHeading text="all boards" count={boards.length} />
             <SidebarMenu>
-              {boardNames.map((name) => (
-                <SidebarButton key={name} text={name} />
+              {boards.map((name) => (
+                <SidebarButton
+                  key={name}
+                  text={name}
+                  isActive={name === activeBoard}
+                  onClick={() => handleChangeBoard(name)}
+                />
               ))}
-              <SidebarButton text="+ Create New Board" isVariant />
+              <SidebarButton
+                text="+ Create New Board"
+                isVariant
+                onClick={() => console.log("create new board")}
+              />
             </SidebarMenu>
           </SidebarMain>
         </SidebarTop>
@@ -37,13 +58,8 @@ export const Sidebar = ({ boardNames }: SidebarProps) => {
               <SwitchButton />
               <ThemeIcon src="/assets/icon-dark-theme.svg" />
             </SidebarThemeContainer>
-            <SidebarToggleContainer>
-              <SidebarToggle onClick={hideSidebar}>
-                <ToggleIcon src="/assets/icon-hide-sidebar.svg" />
-                Hide Sidebar
-              </SidebarToggle>
-            </SidebarToggleContainer>
           </SidebarFooter>
+          <HideSidebarButton onClick={hideSidebar} />
         </SidebarBottom>
       </SidebarContainer>
       <OpenSidebarContainer $isOpen={isOpen}>
@@ -142,39 +158,15 @@ const ThemeIcon = styled.img`
 `;
 
 const SidebarFooter = styled.div<{ $isOpen: boolean }>`
-  height: 100px;
   width: 100%;
   display: none;
   flex-direction: column;
-  gap: 16px;
   padding: 0 13px;
+  margin-bottom: 16px;
 
   @media (min-width: 600px) {
     display: ${(props) => (props.$isOpen ? "flex" : "none")};
   }
-`;
-
-const SidebarToggleContainer = styled.div`
-  width: 100%;
-  color: #828fa3;
-`;
-
-const SidebarToggle = styled.button`
-  background: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  gap: 12px;
-  color: #828fa3;
-  font-weight: bold;
-  line-height: 19px;
-  font-size: 15px;
-`;
-
-const ToggleIcon = styled.img`
-  width: 18px;
-  height: 16px;
 `;
 
 const ShowSidebarIcon = styled.img`

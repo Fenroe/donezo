@@ -1,28 +1,34 @@
 import { Modal, ModalHeader, SubtaskMenuItem } from "../components";
-import { useAtom } from "jotai";
-import { viewableTaskAtom } from "../state";
+import { useAtomValue } from "jotai";
+import { boardDataAtom, viewableTaskAtom } from "../state";
 import styled from "styled-components";
 
 export const ViewTaskModal = () => {
-  const [task, _] = useAtom(viewableTaskAtom);
+  const task = useAtomValue(viewableTaskAtom);
+
+  const boardData = useAtomValue(boardDataAtom);
+
+  const getColumns = () => {
+    return boardData.columns.map((column) => column.name);
+  };
 
   return (
     <Modal>
       <Container>
-        <ModalHeader heading={task?.title || ""} showOptionsButton />
-        <Description>{task?.description}</Description>
+        <ModalHeader heading={task.title || ""} showOptionsButton />
+        <Description>{task.description}</Description>
         <SubtasksHeading>
-          Subtasks ({task?.subtasks.length} of {task?.subtasks.length})
+          Subtasks ({task.subtasks.length} of {task.subtasks.length})
         </SubtasksHeading>
-        {task?.subtasks.map((s) => (
+        {task.subtasks.map((s) => (
           <SubtaskMenuItem key={s.title} subtask={s} />
         ))}
         <SubtasksHeading>Current Status</SubtasksHeading>
         <DropdownContainer>
-          <StyledSelect>
-            <Option>Todo</Option>
-            <Option>Doing</Option>
-            <Option>Done</Option>
+          <StyledSelect value={task.status}>
+            {getColumns().map((column) => (
+              <Option key={column}>{column}</Option>
+            ))}
           </StyledSelect>
           <ArrowIconContainer>
             <ArrowIcon src="/assets/icon-chevron-down.svg" />

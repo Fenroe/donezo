@@ -37,6 +37,12 @@ const CardContainer = styled.button`
   cursor: pointer;
   border: none;
   text-align: left;
+
+  &:hover {
+    > h2 {
+      color: #635fc7 !important;
+    }
+  }
 `;
 
 const Heading = styled.h2`
